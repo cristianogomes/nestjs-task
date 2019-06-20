@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AuthCredentialDto } from './dto/auth-credential.dto';
+import { throws } from 'assert';
 
 @Injectable()
 export class AuthService {
@@ -8,4 +10,8 @@ export class AuthService {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
   ) {}
+
+  async singUp(authCredentialDto: AuthCredentialDto): Promise<void> {
+    return await this.userRepository.singUp(authCredentialDto);
+  }
 }
